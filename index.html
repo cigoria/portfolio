@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Zétény - Portfolio</title>
-    <meta name="description" content="Zétény developer portfolio" />
+    <title>Who's watching?</title>
+    <meta name="description" content="Developer portfolio" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -61,6 +61,7 @@
         align-items: center;
         z-index: 1000;
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        transition: opacity 0.4s ease;
       }
 
       .logo {
@@ -117,6 +118,11 @@
 
       .hero-title span {
         color: var(--text-secondary);
+      }
+
+      #hero-tagline {
+        font-size: 2.2rem;
+        color: #7f849c;
       }
 
       .hero-desc {
@@ -238,11 +244,102 @@
           display: block;
         }
       }
+
+      #intro-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #141414;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition:
+          opacity 0.5s ease,
+          visibility 0.5s;
+      }
+
+      .profile-selection {
+        display: flex;
+        gap: 3rem;
+        margin-top: 2rem;
+      }
+
+      .profile-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .profile-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        border: 3px solid transparent;
+        transition: border-color 0.3s ease;
+      }
+
+      .profile-option:hover {
+        transform: scale(1.05);
+      }
+
+      .profile-option:hover .profile-avatar {
+        border-color: #fff;
+      }
+
+      .profile-name {
+        color: #808080;
+        font-size: 1.2rem;
+        transition: color 0.3s ease;
+      }
+
+      .profile-option:hover .profile-name {
+        color: #fff;
+      }
+
+      #main-wrapper {
+        transition: opacity 0.4s ease;
+        opacity: 1;
+      }
+
+      .faded-out {
+        opacity: 0 !important;
+      }
     </style>
   </head>
   <body>
+    <div id="intro-overlay">
+      <h1 style="color: white; font-weight: 500; margin-bottom: 1rem">
+        Who's watching?
+      </h1>
+      <div class="profile-selection">
+        <div class="profile-option" onclick="selectProfile('zeteny')">
+          <img
+            src="https://github.com/zeti1223.png"
+            class="profile-avatar"
+            alt="zeti1223"
+          />
+          <span class="profile-name">zeti1223</span>
+        </div>
+        <div class="profile-option" onclick="selectProfile('fonix')">
+          <img
+            src="https://github.com/FonixPython.png"
+            class="profile-avatar"
+            alt="FonixPython"
+          />
+          <span class="profile-name">FonixPython</span>
+        </div>
+      </div>
+    </div>
+
     <nav>
-      <div class="logo">zeti1223</div>
+      <div class="logo" id="nav-logo">zeti1223</div>
       <ul class="nav-links">
         <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
@@ -250,109 +347,136 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="menu-toggle">☰</div>
+      <button
+        id="profile-switch"
+        class="btn"
+        style="
+          margin-left: 1rem;
+          font-size: 0.8rem;
+          padding: 0.5rem 1.2rem;
+          border-radius: 50px;
+          border: 1px solid var(--text-secondary);
+          color: var(--text-secondary);
+          background-color: var(--card-bg);
+          cursor: pointer;
+        "
+      >
+        Switch Profile ⇄
+      </button>
     </nav>
 
-    <header id="home">
-      <div class="hero-subtitle">Hi, my name is</div>
-      <h1 class="hero-title">
-        Zétény<br /><span>I build things for the web.</span>
-      </h1>
-      <p class="hero-desc">
-        I'm passionate about building modern, user-friendly web interfaces. I
-        specialize in frontend development and writing clean code.
-      </p>
-      <a href="#projects" class="btn">Check out my work</a>
-    </header>
+    <div id="main-wrapper">
+      <header id="home">
+        <div class="hero-subtitle">Hi, my name is</div>
+        <h1 class="hero-title">
+          <span id="hero-name">Zétény</span><br /><span id="hero-tagline"
+            >I build things for the web.</span
+          >
+        </h1>
+        <p class="hero-desc" id="hero-desc">
+          I'm passionate about building modern, user-friendly web interfaces. I
+          specialize in frontend development and writing clean code.
+        </p>
+        <a href="#projects" class="btn">Check out our work</a>
+      </header>
 
-    <section id="about">
-      <h2 class="section-title">About Me</h2>
-      <div style="color: var(--text-secondary); max-width: 700px">
-        <p>
-          Welcome to my portfolio! I am a software developer who loves learning
-          new technologies. Currently, I work mainly with JavaScript, React, and
-          Node.js.
-        </p>
-        <br />
-        <p>
-          When I'm not coding, I like contributing to open source projects or
-          reading tech articles.
-        </p>
+      <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div
+          id="about-content"
+          style="color: var(--text-secondary); max-width: 700px"
+        >
+          <p>
+            Welcome to my portfolio! I am a software developer who loves
+            learning new technologies. Currently, I work mainly with JavaScript,
+            React, and Node.js.
+          </p>
+          <br />
+          <p>
+            When I'm not coding, I like contributing to open source projects or
+            reading tech articles.
+          </p>
+        </div>
 
         <div
           style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap"
         >
           <img
+            id="github-stats"
             src="https://github-profile-summary-cards.vercel.app/api/cards/stats?username=zeti1223&theme=tokyonight"
             alt="GitHub Stats"
             style="height: 160px; max-width: 100%"
           />
           <img
+            id="github-langs"
             src="https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=zeti1223&theme=tokyonight"
             alt="Top Languages"
             style="height: 160px; max-width: 100%"
           />
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section id="projects">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <h3>E-Commerce Dashboard</h3>
-          <p>
-            A comprehensive admin dashboard for online stores with dark mode and
-            statistics.
-          </p>
-          <div class="tech-stack">
-            <span>React</span>
-            <span>Tailwind</span>
-            <span>Chart.js</span>
+      <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <h3>E-Commerce Dashboard</h3>
+            <p>
+              A comprehensive admin dashboard for online stores with dark mode
+              and statistics.
+            </p>
+            <div class="tech-stack">
+              <span>React</span>
+              <span>Tailwind</span>
+              <span>Chart.js</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3>Weather App</h3>
+            <p>
+              Real-time weather forecast application that automatically detects
+              user location.
+            </p>
+            <div class="tech-stack">
+              <span>JavaScript</span>
+              <span>OpenWeather API</span>
+              <span>CSS3</span>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <h3>Task Manager</h3>
+            <p>
+              Productivity app for organizing tasks with Drag & Drop
+              functionality.
+            </p>
+            <div class="tech-stack">
+              <span>Vue.js</span>
+              <span>Firebase</span>
+              <span>Sass</span>
+            </div>
           </div>
         </div>
+      </section>
 
-        <div class="project-card">
-          <h3>Weather App</h3>
+      <section id="contact">
+        <div class="contact-container">
+          <h2 class="section-title" style="justify-content: center">Contact</h2>
           <p>
-            Real-time weather forecast application that automatically detects
-            user location.
+            I am currently open to new opportunities. Whether you have a
+            question or just want to say hi, my inbox is always open!
           </p>
-          <div class="tech-stack">
-            <span>JavaScript</span>
-            <span>OpenWeather API</span>
-            <span>CSS3</span>
-          </div>
+          <a id="contact-email-btn" href="mailto:email@example.com" class="btn"
+            >Say Hello</a
+          >
         </div>
+      </section>
 
-        <div class="project-card">
-          <h3>Task Manager</h3>
-          <p>
-            Productivity app for organizing tasks with Drag & Drop
-            functionality.
-          </p>
-          <div class="tech-stack">
-            <span>Vue.js</span>
-            <span>Firebase</span>
-            <span>Sass</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="contact-container">
-        <h2 class="section-title" style="justify-content: center">Contact</h2>
-        <p>
-          I am currently open to new opportunities. Whether you have a question
-          or just want to say hi, my inbox is always open!
-        </p>
-        <a href="mailto:email@example.com" class="btn">Say Hello</a>
-      </div>
-    </section>
-
-    <footer>
-      <p>&copy; <span id="year"></span> Zétény. All rights reserved.</p>
-    </footer>
+      <footer>
+        <p>&copy; <span id="year"></span> Zétény. All rights reserved.</p>
+      </footer>
+    </div>
 
     <script>
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
@@ -385,16 +509,93 @@
         }
       });
 
-      const username = "zeti1223";
+      const profiles = {
+        zeteny: {
+          name: "Zétény",
+          logo: "zeti1223",
+          tagline: "I build things for the web.",
+          desc: "I'm passionate about building modern, user-friendly web interfaces. I specialize in frontend development and writing clean code.",
+          about: `<p>Welcome to my portfolio! I am a software developer who loves learning new technologies. Currently, I work mainly with JavaScript, React, and Node.js.</p><br /><p>When I'm not coding, I like contributing to open source projects or reading tech articles.</p>`,
+          github: "zeti1223",
+          accent: "#94e2d5",
+          email: "zeteny@cigoria.eu",
+          repos: [
+            "cigoria/Music-downloader",
+            "cigoria/DMX-Ledstrip",
+            "zeti1223/website",
+          ],
+        },
+        fonix: {
+          name: "Levente",
+          logo: "FonixPython",
+          tagline: "Python & Backend Developer.",
+          desc: "I specialize in Python development, backend systems, and automation. I love solving complex problems with clean, efficient code.",
+          about: `<p>Hi, I'm Levente! I am passionate about Python and backend development. I enjoy automating tasks and building robust server-side applications.</p><br /><p>Check out my GitHub to see what I've been working on lately.</p>`,
+          github: "FonixPython",
+          accent: "#fab387",
+          email: "skyfonix@cigoria.eu",
+          repos: [
+            "cigoria/simpleShare",
+            "cigoria/Music-downloader",
+            "FonixPython/PlaylistSync",
+          ],
+        },
+      };
+
+      let currentProfile = null;
       const projectsGrid = document.querySelector(".projects-grid");
+      const switchBtn = document.getElementById("profile-switch");
+      const root = document.documentElement;
+      const overlay = document.getElementById("intro-overlay");
+      const mainWrapper = document.getElementById("main-wrapper");
+      const nav = document.querySelector("nav");
 
-      const preferredRepos = [
-        "cigoria/Music-downloader",
-        "cigoria/simpleShare",
-        "zeti1223/website",
-      ];
+      window.selectProfile = function (profileKey) {
+        currentProfile = profileKey;
+        loadProfile(profileKey);
 
-      async function fetchProjects() {
+        overlay.style.opacity = "0";
+        setTimeout(() => {
+          overlay.style.visibility = "hidden";
+        }, 500);
+      };
+
+      switchBtn.addEventListener("click", () => {
+        const nextProfile = currentProfile === "zeteny" ? "fonix" : "zeteny";
+
+        mainWrapper.classList.add("faded-out");
+        nav.classList.add("faded-out");
+
+        setTimeout(() => {
+          currentProfile = nextProfile;
+          loadProfile(nextProfile);
+          mainWrapper.classList.remove("faded-out");
+          nav.classList.remove("faded-out");
+        }, 400);
+      });
+
+      function loadProfile(profileKey) {
+        const p = profiles[profileKey];
+
+        document.title = `${p.name} - Portfolio`;
+        document.getElementById("nav-logo").textContent = p.logo;
+        document.getElementById("hero-name").textContent = p.name;
+        document.getElementById("hero-tagline").textContent = p.tagline;
+        document.getElementById("hero-desc").textContent = p.desc;
+        document.getElementById("about-content").innerHTML = p.about;
+        document.getElementById("contact-email-btn").href = `mailto:${p.email}`;
+
+        root.style.setProperty("--accent", p.accent);
+
+        document.getElementById("github-stats").src =
+          `https://github-profile-summary-cards.vercel.app/api/cards/stats?username=${p.github}&theme=tokyonight`;
+        document.getElementById("github-langs").src =
+          `https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=${p.github}&theme=tokyonight`;
+
+        fetchProjects(p.github, p.repos);
+      }
+
+      async function fetchProjects(username, preferredRepos) {
         try {
           let reposData = [];
 
@@ -436,8 +637,6 @@
           console.error("GitHub fetch failed:", error);
         }
       }
-
-      fetchProjects();
     </script>
   </body>
 </html>
