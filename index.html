@@ -7,10 +7,17 @@
     <meta name="description" content="Developer portfolio" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
       rel="stylesheet"
     />
 
@@ -218,6 +225,24 @@
       .contact-container p {
         color: var(--text-secondary);
         margin-bottom: 2rem;
+      }
+
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 2.5rem;
+      }
+
+      .social-icon {
+        font-size: 1.8rem;
+        color: var(--text-secondary);
+        transition: var(--transition);
+      }
+
+      .social-icon:hover {
+        color: var(--accent);
+        transform: translateY(-3px);
       }
 
       footer {
@@ -472,11 +497,12 @@
           <a id="contact-email-btn" href="mailto:email@example.com" class="btn"
             >Say Hello</a
           >
+          <div id="social-links" class="social-links"></div>
         </div>
       </section>
 
       <footer>
-        <p>&copy; <span id="year"></span> Zétény. All rights reserved.</p>
+        <p>&copy; <span id="year"></span> Cigoria. All rights reserved.</p>
       </footer>
     </div>
 
@@ -557,6 +583,35 @@
           document.getElementById("about-content").innerHTML = p.about;
           document.getElementById("contact-email-btn").href =
             `mailto:${p.email}`;
+
+          // Social links betöltése
+          const socialContainer = document.getElementById("social-links");
+          socialContainer.innerHTML = "";
+          if (p.socials) {
+            const icons = {
+              github: "ri-github-fill",
+              codepen: "ri-codepen-fill",
+              youtube: "ri-youtube-fill",
+              unsplash: "ri-unsplash-fill",
+              facebook: "ri-facebook-circle-fill",
+              reddit: "ri-reddit-fill",
+            };
+
+            const order = [
+              "github",
+              "codepen",
+              "youtube",
+              "unsplash",
+              "facebook",
+              "reddit",
+            ];
+
+            order.forEach((platform) => {
+              if (p.socials[platform]) {
+                socialContainer.innerHTML += `<a href="${p.socials[platform]}" target="_blank" class="social-icon"><i class="${icons[platform]}"></i></a>`;
+              }
+            });
+          }
 
           root.style.setProperty("--accent", p.accent);
 

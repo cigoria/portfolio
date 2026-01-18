@@ -7,6 +7,14 @@
   "github": "zeti1223",
   "accent": "#94e2d5",
   "email": "zeteny@cigoria.eu",
+  "socials": {
+    "facebook": "https://facebook.com/Zeti1223",
+    "youtube": "https://youtube.com/@Zeti_1223-offical",
+    "unsplash": "https://unsplash.com/@zeti_1223",
+    "reddit": "https://reddit.com/user/Zeti_1223",
+    "codepen": "https://codepen.io/zeti1223",
+    "github": "https://github.com/zeti1223"
+  },
   "repos": [
     "cigoria/Music-downloader",
     "cigoria/DMX-Ledstrip",
