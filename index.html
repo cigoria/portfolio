@@ -345,24 +345,7 @@
       <h1 style="color: white; font-weight: 500; margin-bottom: 1rem">
         Who's watching?
       </h1>
-      <div class="profile-selection">
-        <div class="profile-option" onclick="selectProfile('zeteny')">
-          <img
-            src="https://github.com/zeti1223.png"
-            class="profile-avatar"
-            alt="zeti1223"
-          />
-          <span class="profile-name">zeti1223</span>
-        </div>
-        <div class="profile-option" onclick="selectProfile('fonix')">
-          <img
-            src="https://github.com/FonixPython.png"
-            class="profile-avatar"
-            alt="FonixPython"
-          />
-          <span class="profile-name">FonixPython</span>
-        </div>
-      </div>
+      <div class="profile-selection"></div>
     </div>
 
     <nav>
@@ -537,6 +520,31 @@
         }
       });
 
+      const profiles = [
+        {
+          key: "zeteny",
+          name: "zeti1223",
+          avatar: "https://github.com/zeti1223.png",
+        },
+        {
+          key: "fonix",
+          name: "FonixPython",
+          avatar: "https://github.com/FonixPython.png",
+        }
+      ];
+
+      const profileSelection = document.querySelector(".profile-selection");
+      profiles.forEach((p) => {
+        const div = document.createElement("div");
+        div.className = "profile-option";
+        div.onclick = () => selectProfile(p.key);
+        div.innerHTML = `
+          <img src="${p.avatar}" class="profile-avatar" alt="${p.name}" />
+          <span class="profile-name">${p.name}</span>
+        `;
+        profileSelection.appendChild(div);
+      });
+
       let currentProfile = null;
       const projectsGrid = document.querySelector(".projects-grid");
       const switchBtn = document.getElementById("profile-switch");
@@ -556,18 +564,8 @@
       };
 
       switchBtn.addEventListener("click", () => {
-        const nextProfile = currentProfile === "zeteny" ? "fonix" : "zeteny";
-
-        mainWrapper.classList.add("faded-out");
-        nav.classList.add("faded-out");
-
-        setTimeout(() => {
-          currentProfile = nextProfile;
-          loadProfile(nextProfile).then(() => {
-            mainWrapper.classList.remove("faded-out");
-            nav.classList.remove("faded-out");
-          });
-        }, 400);
+        overlay.style.visibility = "visible";
+        overlay.style.opacity = "1";
       });
 
       async function loadProfile(profileKey) {
