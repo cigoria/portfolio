@@ -1,0 +1,15 @@
+{
+  "name": "Zétény",
+  "logo": "zeti1223",
+  "tagline": "Frontend & Arduino Developer",
+  "desc": "I'm passionate about building modern, user-friendly web interfaces. I specialize in frontend development and writing clean code.",
+  "about": "<p>Welcome to my portfolio! I am a software developer who loves learning new technologies. I mainly work with JavaScript and Python, and I’m currently learning Lua.</p><br /><p>When I'm not coding, I like contributing to open source projects or reading tech articles.</p>",
+  "github": "zeti1223",
+  "accent": "#94e2d5",
+  "email": "zeteny@cigoria.eu",
+  "repos": [
+    "cigoria/Music-downloader",
+    "cigoria/DMX-Ledstrip",
+    "zeti1223/website"
+  ]
+}

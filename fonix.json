@@ -1,0 +1,15 @@
+{
+  "name": "Levente",
+  "logo": "FonixPython",
+  "tagline": "Python & Backend Developer.",
+  "desc": "I specialize in Python development, backend systems, and automation. I love solving complex problems with clean, efficient code.",
+  "about": "<p>Hi, I'm Levente! I am passionate about Python and backend development. I enjoy automating tasks and building robust server-side applications.</p><br /><p>Check out my GitHub to see what I've been working on lately.</p>",
+  "github": "FonixPython",
+  "accent": "#fab387",
+  "email": "skyfonix@cigoria.eu",
+  "repos": [
+    "cigoria/simpleShare",
+    "cigoria/Music-downloader",
+    "FonixPython/PlaylistSync"
+  ]
+}

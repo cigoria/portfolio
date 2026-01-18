@@ -509,39 +509,6 @@
         }
       });
 
-      const profiles = {
-        zeteny: {
-          name: "Zétény",
-          logo: "zeti1223",
-          tagline: "Frontend & Arduino Developer",
-          desc: "I'm passionate about building modern, user-friendly web interfaces. I specialize in frontend development and writing clean code.",
-          about: `<p>Welcome to my portfolio! I am a software developer who loves learning new technologies. I mainly work with JavaScript and Python, and I’m currently learning Lua.</p><br /><p>When I'm not coding, I like contributing to open source projects or reading tech articles.</p>`,
-          github: "zeti1223",
-          accent: "#94e2d5",
-          email: "zeteny@cigoria.eu",
-          repos: [
-            "cigoria/Music-downloader",
-            "cigoria/DMX-Ledstrip",
-            "zeti1223/website",
-          ],
-        },
-        fonix: {
-          name: "Levente",
-          logo: "FonixPython",
-          tagline: "Python & Backend Developer.",
-          desc: "I specialize in Python development, backend systems, and automation. I love solving complex problems with clean, efficient code.",
-          about: `<p>Hi, I'm Levente! I am passionate about Python and backend development. I enjoy automating tasks and building robust server-side applications.</p><br /><p>Check out my GitHub to see what I've been working on lately.</p>`,
-          github: "FonixPython",
-          accent: "#fab387",
-          email: "skyfonix@cigoria.eu",
-          repos: [
-            "cigoria/simpleShare",
-            "cigoria/Music-downloader",
-            "FonixPython/PlaylistSync",
-          ],
-        },
-      };
-
       let currentProfile = null;
       const projectsGrid = document.querySelector(".projects-grid");
       const switchBtn = document.getElementById("profile-switch");
@@ -568,31 +535,38 @@
 
         setTimeout(() => {
           currentProfile = nextProfile;
-          loadProfile(nextProfile);
-          mainWrapper.classList.remove("faded-out");
-          nav.classList.remove("faded-out");
+          loadProfile(nextProfile).then(() => {
+            mainWrapper.classList.remove("faded-out");
+            nav.classList.remove("faded-out");
+          });
         }, 400);
       });
 
-      function loadProfile(profileKey) {
-        const p = profiles[profileKey];
+      async function loadProfile(profileKey) {
+        try {
+          const response = await fetch(`${profileKey}.json`);
+          const p = await response.json();
 
-        document.title = `${p.name} - Portfolio`;
-        document.getElementById("nav-logo").textContent = p.logo;
-        document.getElementById("hero-name").textContent = p.name;
-        document.getElementById("hero-tagline").textContent = p.tagline;
-        document.getElementById("hero-desc").textContent = p.desc;
-        document.getElementById("about-content").innerHTML = p.about;
-        document.getElementById("contact-email-btn").href = `mailto:${p.email}`;
+          document.title = `${p.name} - Portfolio`;
+          document.getElementById("nav-logo").textContent = p.logo;
+          document.getElementById("hero-name").textContent = p.name;
+          document.getElementById("hero-tagline").textContent = p.tagline;
+          document.getElementById("hero-desc").textContent = p.desc;
+          document.getElementById("about-content").innerHTML = p.about;
+          document.getElementById("contact-email-btn").href =
+            `mailto:${p.email}`;
 
-        root.style.setProperty("--accent", p.accent);
+          root.style.setProperty("--accent", p.accent);
 
-        document.getElementById("github-stats").src =
-          `https://github-profile-summary-cards.vercel.app/api/cards/stats?username=${p.github}&theme=tokyonight`;
-        document.getElementById("github-langs").src =
-          `https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=${p.github}&theme=tokyonight`;
+          document.getElementById("github-stats").src =
+            `https://github-profile-summary-cards.vercel.app/api/cards/stats?username=${p.github}&theme=tokyonight`;
+          document.getElementById("github-langs").src =
+            `https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=${p.github}&theme=tokyonight`;
 
-        fetchProjects(p.github, p.repos);
+          fetchProjects(p.github, p.repos);
+        } catch (error) {
+          console.error("Failed to load profile JSON:", error);
+        }
       }
 
       async function fetchProjects(username, preferredRepos) {
