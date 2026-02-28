@@ -4,7 +4,7 @@
   "tagline": "Frontend & Arduino Developer",
   "desc": "I'm passionate about building modern, user-friendly web interfaces. I specialize in frontend development and writing clean code.",
   "about": "<p>Welcome to my portfolio! I am a software developer who loves learning new technologies. I mainly work with JavaScript and Python, and I’m currently learning Lua.</p><br /><p>When I'm not coding, I like contributing to open source projects or reading tech articles.</p>",
-  "github": "zeti1223",
+  "ShitHub": "zeti1223",
   "accent": "#94e2d5",
   "email": "zeteny@cigoria.eu",
   "website": "https://zeteny.cigoria.eu",
@@ -14,11 +14,11 @@
     "unsplash": "https://unsplash.com/@zeti_1223",
     "reddit": "https://reddit.com/user/Zeti_1223",
     "codepen": "https://codepen.io/zeti1223",
-    "github": "https://github.com/zeti1223"
+    "ShitHub": "https://github.com/zeti1223"
   },
   "repos": [
-    "cigoria/Music-downloader",
-    "zeti1223/Local-Music-Library-Sync",
+    "cigoria/CigoriaDown",
+    "cigoria/simpleShare",
     "zeti1223/website"
   ]
 }
